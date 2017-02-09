@@ -5,7 +5,6 @@
 package com.zs5s.util;
 
 import org.apache.http.*;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -85,7 +84,7 @@ public class HttpClientByYL {
     /**
      * get方法提交参数
      * @param url
-     * @return
+     * @return 返回结果
      */
 
     public static String httpGetRequest(String url) {
