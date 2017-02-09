@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <script th:src="@{/js/echarts.common.min.js}"></script>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/showAllInfo.js}"></script>
+    <title>总体趋势</title>
+</head>
+<body>
+    <a href="/show/showNowInfo">当前状态</a>
+
+    <div>
+        <!-- 总体所有状态折线图 -->
+        <div id="allZhe" style="width: 600px;height:400px;float: left;"></div>
+    </div>
+
+    <div>
+        <!-- 总体IE折线图 -->
+        <div id="allIEZhe" style="width: 600px;height:400px;float: left;"></div>
+        <!-- 总体Chrome折线图 -->
+        <div id="allChromeZhe" style="width: 600px;height:400px;float: left;"></div>
+        <!-- 总体Firefox折线图 -->
+        <div id="allFirefoxZhe" style="width: 600px;height:400px;float: left;"></div>
+    </div>
+
+</body>
+</html>

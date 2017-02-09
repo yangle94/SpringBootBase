@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <script th:src="@{/js/echarts.common.min.js}"></script>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/showNowInfo.js}"></script>
+    <title>当前信息</title>
+</head>
+<body>
+    <a href="/show/showAllInfo">整体趋势</a>
+    <div>
+        <!-- 当前时间所有状态柱状图 -->
+        <div id="nowZhu" style="width: 600px;height:400px;float: left;"></div>
+        <!-- 当前时间所有状态饼图 -->
+        <div id="nowBing" style="width: 600px;height:400px;float: left;"></div>
+    </div>
+
+    <div>
+        <!-- 当前时间IE柱状图 -->
+        <div id="nowIEZhu" style="width: 600px;height:400px;float: left;"></div>
+        <!-- 当前时间Chrome柱状图 -->
+        <div id="nowChromeZhu" style="width: 600px;height:400px;float: left;"></div>
+        <!-- 当前时间Firefox柱状图 -->
+        <div id="nowFirefoxZhu" style="width: 600px;height:400px;float: left;"></div>
+    </div>
+
+</body>
+</html>
