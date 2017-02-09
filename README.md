@@ -1,7 +1,7 @@
 #spring-boot项目基础搭建
 ##1.启用了thymeleaf模版
 ##2.启用了spring-test
-##3.集成了swagger-ui
+##3.集成了swagger-ui(localhost:8080/swagger-ui.html)
 ##4.制作了了多环境打包（基于maven -P参数）
 ##5.集成了mybatis
 ##6.制作了日志工具类

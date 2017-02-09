@@ -4,8 +4,11 @@
  */
 package com.zs5s.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author yangle
@@ -15,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class IndexController {
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "记录ID", required = true, dataType = "String", paramType = "Query")
+    })
     @RequestMapping("/")
-    public String index() {
+    public String index(@RequestParam String id) {
         return "";
     }
 }
