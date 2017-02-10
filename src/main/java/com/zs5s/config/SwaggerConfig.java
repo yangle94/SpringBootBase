@@ -38,11 +38,11 @@ public class SwaggerConfig {
     }
 
     private ApiInfo demoApiInfo() {
-        ApiInfo apiInfo = new ApiInfo("征数科技",//大标题
-                "selenium历史信息记录",//小标题
+        ApiInfo apiInfo = new ApiInfo("豆神科技",//大标题
+                "豆神科技",//小标题
                 "1.0",//版本
                 "NO terms of service",
-                "征数科技",//作者
+                "Angle",//作者
                 "The Apache License, Version 2.0",//链接显示文字
                 "http://www.apache.org/licenses/LICENSE-2.0.html"//网站链接
         );
