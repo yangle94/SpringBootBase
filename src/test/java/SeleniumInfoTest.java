@@ -3,8 +3,8 @@
  * Copyright (C) 2004-2017 All Rights Reserved.
  */
 
-import com.zs5s.Base;
-import com.zs5s.mapper.SeleniumInfoMapper;
+import cn.ylapl.Base;
+import cn.ylapl.mapper.SeleniumInfoMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
