@@ -4,8 +4,11 @@
  */
 package cn.ylapl.controller;
 
+import cn.ylapl.service.SeleniumInfoService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,12 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("jpush")
 public class IndexController {
 
+    @Autowired
+    private SeleniumInfoService seleniumInfoService;
+
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "记录ID", required = true, dataType = "String", paramType = "Query")
     })
+    @ApiOperation("测试接口")
     @RequestMapping("/")
     public String index(@RequestParam String id) {
-        return "";
+        return seleniumInfoService.test();
     }
 
     public static IndexController getIndex() {

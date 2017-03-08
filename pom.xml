@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
+        <version>1.5.2.RELEASE</version>
     </parent>
 
     <!-- Add typical dependencies for a web application -->
@@ -82,12 +82,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
-        </dependency>
-        <!-- 极光推送 -->
-        <dependency>
-            <groupId>cn.jpush.api</groupId>
-            <artifactId>jpush-client</artifactId>
-            <version>3.2.15</version>
         </dependency>
     </dependencies>
     <!-- 多环境打包 -->

@@ -27,12 +27,11 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("demo")
                 .genericModelSubstitutes(DeferredResult.class)
-//              .genericModelSubstitutes(ResponseEntity.class)
                 .useDefaultResponseMessages(false)
                 .forCodeGeneration(false)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.zs5s.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.ylapl.controller"))
                 .paths(PathSelectors.any())//过滤的接口
                 .build().apiInfo(demoApiInfo());
     }
