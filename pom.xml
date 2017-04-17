@@ -3,12 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Reptile</groupId>
-    <artifactId>Reptile</artifactId>
+    <groupId>${finalName}</groupId>
+    <artifactId>cn.ylap.springbootbase</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
 
     <properties>
+        <finalName>springboot-base</finalName>
         <java.version>1.8</java.version>
         <springboot.version>1.5.2.RELEASE</springboot.version>
         <redis.version>1.8.1.RELEASE</redis.version>
@@ -22,6 +23,7 @@
         <selenium.version>3.3.1</selenium.version>
         <java.version>1.8</java.version>
         <jedis.version>2.9.0</jedis.version>
+        <docker.image.prefix>angley</docker.image.prefix>
     </properties>
 
     <!-- Inherit defaults from Spring Boot -->
@@ -213,7 +215,7 @@
 
     <!-- Package as an executable jar -->
     <build>
-        <finalName>Reptlie</finalName>
+        <finalName>${finalName}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -232,6 +234,22 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${finalName}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
