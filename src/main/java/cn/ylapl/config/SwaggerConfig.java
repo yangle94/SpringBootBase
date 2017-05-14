@@ -1,7 +1,3 @@
-/**
- * Company
- * Copyright (C) 2004-2017 All Rights Reserved.
- */
 package cn.ylapl.config;
 
 import org.springframework.context.annotation.Bean;
@@ -37,7 +33,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo demoApiInfo() {
-        ApiInfo apiInfo = new ApiInfo("豆神科技",//大标题
+
+        return new ApiInfo("豆神科技",//大标题
                 "豆神科技",//小标题
                 "1.0",//版本
                 "NO terms of service",
@@ -45,7 +42,5 @@ public class SwaggerConfig {
                 "The Apache License, Version 2.0",//链接显示文字
                 "http://www.apache.org/licenses/LICENSE-2.0.html"//网站链接
         );
-
-        return apiInfo;
     }
 }

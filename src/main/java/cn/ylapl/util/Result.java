@@ -18,7 +18,7 @@ public class Result<T> implements Serializable{
     /**
      * 判断返回结果是否成功 0是失败 1是成功
      */
-    public boolean success() {
+    public boolean isSuccess() {
         return code == 0;
     }
 

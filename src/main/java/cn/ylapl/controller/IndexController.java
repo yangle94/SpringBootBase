@@ -1,7 +1,3 @@
-/**
- * Company
- * Copyright (C) 2004-2017 All Rights Reserved.
- */
 package cn.ylapl.controller;
 
 import cn.ylapl.service.SeleniumInfoService;

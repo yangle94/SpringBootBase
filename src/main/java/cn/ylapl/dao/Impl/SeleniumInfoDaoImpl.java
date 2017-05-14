@@ -1,15 +1,12 @@
-/**
- * Company
- * Copyright (C) 2004-2017 All Rights Reserved.
- */
 package cn.ylapl.dao.Impl;
 
 import cn.ylapl.dao.SeleniumInfoDao;
 import cn.ylapl.entity.SeleniumInfo;
 import cn.ylapl.mapper.SeleniumInfoMapper;
-import cn.ylapl.util.logger.LogUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -18,10 +15,12 @@ import java.util.List;
  * @author yangle
  * @version $Id SeleniumInfoDaoImpl.java, v 0.1 2017-01-22 下午4:45 yangle Exp $$
  */
-@Component
+@Repository
 public class SeleniumInfoDaoImpl implements SeleniumInfoDao {
 
     private final SeleniumInfoMapper seleniumInfoMapper;
+
+    private static final Logger logger = LoggerFactory.getLogger(SeleniumInfoDaoImpl.class);
 
     SeleniumInfoDaoImpl(@Autowired SeleniumInfoMapper seleniumInfoMapper) {
         this.seleniumInfoMapper = seleniumInfoMapper;
@@ -29,43 +28,43 @@ public class SeleniumInfoDaoImpl implements SeleniumInfoDao {
 
     @Override
     public SeleniumInfo getSeleniumInfo(int id) {
-        LogUtil.info(this,"id:" + id);
+        logger.info("id:{}", id);
         return seleniumInfoMapper.findById(id);
     }
 
     @Override
     public List<SeleniumInfo> getSeleniumInfoList(List<Integer> ids) {
-        LogUtil.info(this,"idsSize:" + ids.size());
+        logger.info("idsSize:{}", ids.size());
         return seleniumInfoMapper.findListInIds(ids);
     }
 
     @Override
     public int insertSeleniumInfo(SeleniumInfo seleniumInfo) {
-        LogUtil.info(this,"id:" + seleniumInfo.getId());
+        logger.info("id:{}", seleniumInfo.getId());
         return seleniumInfoMapper.insert(seleniumInfo);
     }
 
     @Override
     public int deleteSeleniumInfo(SeleniumInfo seleniumInfo) {
-        LogUtil.info(this,"id:" + seleniumInfo.getId());
+        logger.info("id:{}", seleniumInfo.getId());
         return seleniumInfoMapper.deleteById(seleniumInfo.getId());
     }
 
     @Override
     public int updateSeleniumInfo(SeleniumInfo seleniumInfo) {
-        LogUtil.info(this,"id:" + seleniumInfo.getId());
+        logger.info("id:{}", seleniumInfo.getId());
         return seleniumInfoMapper.updateById(seleniumInfo);
     }
 
     @Override
     public List<SeleniumInfo> findAll() {
-        LogUtil.info(this,"findAll");
+        logger.info("findAll");
         return seleniumInfoMapper.findAll();
     }
 
     @Override
     public SeleniumInfo findLast() {
-        LogUtil.info(this,"findAll");
+        logger.info("findAll");
         return seleniumInfoMapper.findLast();
     }
 }

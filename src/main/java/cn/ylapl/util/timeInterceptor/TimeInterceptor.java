@@ -25,8 +25,8 @@ public class TimeInterceptor {
 
     /**
      * 统计方法执行耗时Around环绕通知
-     * @param joinPoint
-     * @return
+     * @param joinPoint     切点对象
+     * @return              方法执行返回值
      */
     @Around(POINT)
     public Object timeAround(ProceedingJoinPoint joinPoint) {
@@ -54,9 +54,9 @@ public class TimeInterceptor {
 
     /**
      * 打印方法执行耗时的信息，如果超过了一定的时间，才打印
-     * @param methodName
-     * @param startTime
-     * @param endTime
+     * @param methodName    方法名
+     * @param startTime     开始时间
+     * @param endTime       结束时间
      */
     private void printExecTime(String methodName, long startTime, long endTime) {
         long diffTime = endTime - startTime;
