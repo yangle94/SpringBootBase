@@ -1,7 +1,3 @@
-/**
- * Company
- * Copyright (C) 2004-2016 All Rights Reserved.
- */
 package cn.ylapl.util;
 
 import org.apache.http.*;
