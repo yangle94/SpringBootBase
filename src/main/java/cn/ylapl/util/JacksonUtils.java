@@ -30,9 +30,10 @@ public class JacksonUtils {
             mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));//设置时间格式
         }
 
-        private static ObjectMapper getInstance() {
-            return mapper;
-        }
+    }
+
+    private static ObjectMapper getInstance() {
+        return ObjectMapperBuild.mapper;
     }
 
     /**
@@ -44,7 +45,7 @@ public class JacksonUtils {
 
         try {
 
-            return ObjectMapperBuild.getInstance().writeValueAsString(t);
+            return getInstance().writeValueAsString(t);
         } catch (JsonProcessingException e) {
 
             logger.error("实体对象转换Json失败，对象信息{}", t);
@@ -64,7 +65,7 @@ public class JacksonUtils {
 
         try {
 
-            return ObjectMapperBuild.getInstance().readValue(json, clazz);
+            return getInstance().readValue(json, clazz);
 
         } catch (IOException e) {
 
@@ -85,9 +86,9 @@ public class JacksonUtils {
 
         try {
 
-            JavaType javaType = ObjectMapperBuild.getInstance().getTypeFactory().constructParametricType(ArrayList.class, clazz);
+            JavaType javaType = getInstance().getTypeFactory().constructParametricType(ArrayList.class, clazz);
 
-            return ObjectMapperBuild.getInstance().readValue(json, javaType);
+            return getInstance().readValue(json, javaType);
 
         } catch (IOException e) {
 
@@ -111,7 +112,7 @@ public class JacksonUtils {
 
         try {
 
-            return ObjectMapperBuild.getInstance().readValue(json, typeReference);
+            return getInstance().readValue(json, typeReference);
 
         } catch (Exception e) {
 
@@ -132,7 +133,7 @@ public class JacksonUtils {
 
         try {
 
-            return ObjectMapperBuild.getInstance().writerWithDefaultPrettyPrinter().writeValueAsString(t);
+            return getInstance().writerWithDefaultPrettyPrinter().writeValueAsString(t);
 
         } catch (IOException e) {
 
