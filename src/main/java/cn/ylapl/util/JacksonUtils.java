@@ -17,23 +17,29 @@ import java.util.ArrayList;
  * Created by Angle on 2017/4/15.
  */
 public class JacksonUtils {
+    private JacksonUtils() {
+        throw new AssertionError("JacksonUtils");
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(JacksonUtils.class);
 
     private static final class ObjectMapperBuild {
 
-        private static final ObjectMapper mapper = new ObjectMapper();
+        private static final ObjectMapper MAPPER = new ObjectMapper();
 
         static {
-            mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);//设置可用单引号
-            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);//设置字段可以不用双引号包括
-            mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));//设置时间格式
+            //设置可用单引号
+            MAPPER.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+            //设置字段可以不用双引号包括
+            MAPPER.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+            //设置时间格式
+            MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         }
 
     }
 
     private static ObjectMapper getInstance() {
-        return ObjectMapperBuild.mapper;
+        return ObjectMapperBuild.MAPPER;
     }
 
     /**
@@ -44,7 +50,6 @@ public class JacksonUtils {
     public static <T> String objectToJson(T t) {
 
         try {
-
             return getInstance().writeValueAsString(t);
         } catch (JsonProcessingException e) {
 
@@ -64,11 +69,8 @@ public class JacksonUtils {
     public static <T> T jsonToObject(String json, Class<T> clazz) {
 
         try {
-
             return getInstance().readValue(json, clazz);
-
         } catch (IOException e) {
-
             logger.error("Json转换实体对象失败！Json：{},className:{}", json, clazz.getSimpleName());
             e.printStackTrace();
         }
@@ -85,13 +87,9 @@ public class JacksonUtils {
     public static <T> T jsonToList(String json, Class<T> clazz) {
 
         try {
-
             JavaType javaType = getInstance().getTypeFactory().constructParametricType(ArrayList.class, clazz);
-
             return getInstance().readValue(json, javaType);
-
         } catch (IOException e) {
-
             logger.error("反序列化对象失败,Json：{}, className:{}", json, clazz.getSimpleName());
             e.printStackTrace();
         }
@@ -111,13 +109,9 @@ public class JacksonUtils {
     public static <T> T jsonToList(String json, TypeReference<T> typeReference) {
 
         try {
-
             return getInstance().readValue(json, typeReference);
-
         } catch (Exception e) {
-
             logger.error("反序列化对象失败,Json：{}, className:{}", json, typeReference.getType());
-
             e.printStackTrace();
         }
 
@@ -132,13 +126,9 @@ public class JacksonUtils {
     public  static <T> String console(T t){
 
         try {
-
             return getInstance().writerWithDefaultPrettyPrinter().writeValueAsString(t);
-
         } catch (IOException e) {
-
             logger.error("序列化对象失败,对象：{}", t);
-
             e.printStackTrace();
         }
 

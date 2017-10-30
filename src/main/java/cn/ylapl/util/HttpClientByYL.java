@@ -15,6 +15,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.eclipse.jetty.server.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,9 @@ public class HttpClientByYL {
 
     private static Logger logger = LoggerFactory.getLogger(HttpClientByYL.class);
 
-    //静态内部类保证单例
+    /**
+     * 静态内部类保证单例
+     */
     private static final class SignCm {
 
         private static PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
@@ -50,8 +53,10 @@ public class HttpClientByYL {
         //初始化httpclient路由参数
         static {
             cm = new PoolingHttpClientConnectionManager();
-            cm.setMaxTotal(MAX_CONNECTION);// 整个连接池最大连接数
-            cm.setDefaultMaxPerRoute(MAX_ROUTE_NUM);// 每路由最大连接数，默认值是2
+            // 整个连接池最大连接数
+            cm.setMaxTotal(MAX_CONNECTION);
+            // 每路由最大连接数，默认值是2
+            cm.setDefaultMaxPerRoute(MAX_ROUTE_NUM);
         }
 
         private static PoolingHttpClientConnectionManager getCm() {
@@ -64,6 +69,7 @@ public class HttpClientByYL {
      */
     private static CloseableHttpClient getHttpClient() {
         return HttpClients.custom().setRedirectStrategy(new DefaultRedirectStrategy() {
+            @Override
             public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) {
                 boolean isRedirect = false;
                 try {
@@ -73,7 +79,7 @@ public class HttpClientByYL {
                 }
                 if (!isRedirect) {
                     int responseCode = response.getStatusLine().getStatusCode();
-                    if (responseCode == 301 || responseCode == 302) {
+                    if (responseCode == Response.SC_MOVED_PERMANENTLY || responseCode == Response.SC_MOVED_TEMPORARILY) {
                         return true;
                     }
                 }
@@ -258,10 +264,8 @@ public class HttpClientByYL {
 
             if(entity != null) {
                 try {
-
                     EntityUtils.consume(entity);
                 } catch (IOException e) {
-
                     logger.error("httpentity关闭失败！");
                     e.printStackTrace();
                 }

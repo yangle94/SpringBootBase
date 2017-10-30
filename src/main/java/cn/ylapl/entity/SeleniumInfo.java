@@ -4,12 +4,27 @@
  */
 package cn.ylapl.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 
 /**
  * @author yangle
  * @version $Id SeleniumInfo.java, v 0.1 2017-01-22 下午3:56 yangle Exp $$
  */
+@Data
+@Accessors(chain = true)
 public class SeleniumInfo {
     /**
      * id
@@ -28,45 +43,31 @@ public class SeleniumInfo {
      */
     private Date createDate;
 
-    public int getId() {
-        return id;
+    public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
+        keygen.initialize(512);
+        KeyPair kp = keygen.generateKeyPair();
+        RSAPrivateKey privateKey = (RSAPrivateKey)kp.getPrivate();
+        RSAPublicKey publicKey = (RSAPublicKey)kp.getPublic();
+        System.out.println("KEY:\n" + bytesToHexString(publicKey.getEncoded()) + "\n");
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE,privateKey);
+        System.out.println("RESULT:\n" + bytesToHexString(cipher.doFinal("ilanyu".getBytes())) + "\n");
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    @Override
-    public String toString() {
-        return "SeleniumInfo{" +
-                "id=" + id +
-                ", info='" + info + '\'' +
-                ", ip='" + ip + '\'' +
-                ", createDate=" + createDate +
-                '}';
+    private static String bytesToHexString(byte[] src){
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (byte aSrc : src) {
+            int v = aSrc & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
     }
 }

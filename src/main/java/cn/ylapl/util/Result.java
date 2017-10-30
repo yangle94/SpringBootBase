@@ -1,13 +1,20 @@
 package cn.ylapl.util;
 
-import java.io.PrintWriter;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
-import java.io.StringWriter;
 
 /**
  * 返回值封装类
- * Created by Angle on 2017/3/3.
+ *
+ * @author Angle
+ * @date 2017/3/3
  */
+@Data
+@Accessors(chain = true)
+@Slf4j
 public class Result<T> implements Serializable{
     private int code;
     private T object;
@@ -34,51 +41,6 @@ public class Result<T> implements Serializable{
      */
     public boolean hasException() {
         return exception != null;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public Result setCode(int code) {
-        this.code = code;
-        return this;
-    }
-
-    public T getObject() {
-        return object;
-    }
-
-    public Result<T> setObject(T object) {
-        this.object = object;
-        return this;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public Result<T> setError(String error) {
-        this.error = error;
-        return this;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public Result<T> setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public Exception getException() {
-        return exception;
-    }
-
-    public Result<T> setException(Exception exception) {
-        this.exception = exception;
-        return this;
     }
 
     /**
@@ -143,20 +105,4 @@ public class Result<T> implements Serializable{
         result.setMessage(e.getMessage());
         return result;
     }
-
-    public String toString() {
-        StringBuilder result = new StringBuilder("Result");
-        if (object != null) result.append("<").append(object.getClass().getSimpleName()).append(">");
-        result.append(": {code=").append(code);
-        if (object != null) result.append(", object=").append(object);
-        if (error != null) result.append(", error=").append(error);
-        if (message != null) result.append(", message=").append(message);
-        if (exception != null) {
-            StringWriter stringWriter = new StringWriter();
-            exception.printStackTrace(new PrintWriter(stringWriter));
-            result.append(", exception=").append(stringWriter.toString());
-        }
-        result.append(" }");
-        return result.toString();
-    } 
 }
