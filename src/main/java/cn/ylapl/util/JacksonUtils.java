@@ -124,7 +124,7 @@ public class JacksonUtils {
      * @param t 对象
      * @return 对象json
      */
-    public  static <T> String console(T t){
+    public static <T> String console(T t){
 
         try {
             return getInstance().writerWithDefaultPrettyPrinter().writeValueAsString(t);
@@ -133,6 +133,6 @@ public class JacksonUtils {
             e.printStackTrace();
         }
 
-        return "";
+        return null;
     }
 }
