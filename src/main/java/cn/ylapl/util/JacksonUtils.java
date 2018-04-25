@@ -17,8 +17,9 @@ import java.util.ArrayList;
  * Created by Angle on 2017/4/15.
  */
 public class JacksonUtils {
+
     private JacksonUtils() {
-        throw new AssertionError("JacksonUtils");
+        throw new AssertionError("JacksonUtils不能被实例化");
     }
 
     private static final Logger logger = LoggerFactory.getLogger(JacksonUtils.class);
